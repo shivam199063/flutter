@@ -10,6 +10,7 @@ class MyAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // bottomNavigationBar: BottomNavigationBar(items: []),
       floatingActionButton: FloatingActionButton(
         onPressed: null,
         child: Icon(Icons.accessible_forward),
@@ -22,23 +23,38 @@ class MyAppBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      offset: Offset(5.0, 5.0),
-                      color: Colors.black,
-                      spreadRadius: 2,
-                      blurRadius: 10,
-                    )
-                  ],
-                  borderRadius: BorderRadius.circular(150),
-                  color: Colors.cyanAccent,
-                  border: Border.all(width: 8, color: Colors.white),
-                ),
-                child: CircleAvatar(
-                  radius: 70,
-                  backgroundImage: AssetImage("images/saini.jpg"),
+              InkWell(
+                onTap: () {
+                  const snackBar = SnackBar(
+                    content: Text(
+                      "This is Shivam Image",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
+                    backgroundColor: Colors.brown,
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        offset: Offset(5.0, 5.0),
+                        color: Colors.black,
+                        spreadRadius: 2,
+                        blurRadius: 10,
+                      )
+                    ],
+                    borderRadius: BorderRadius.circular(150),
+                    color: Colors.cyanAccent,
+                    border: Border.all(width: 8, color: Colors.white),
+                  ),
+                  child: CircleAvatar(
+                    radius: 70,
+                    backgroundImage: AssetImage("images/saini.jpg"),
+                  ),
                 ),
               ),
               SizedBox(
@@ -46,16 +62,28 @@ class MyAppBar extends StatelessWidget {
               ),
               InkWell(
                   onTap: () {
-                    debugPrint("my name is saini");
+                    // debugPrint("my name is saini");
+                    const snackBar = SnackBar(
+                      content: Text(
+                        "I'm Shivam Saini",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                      backgroundColor: Colors.brown,
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   },
                   onDoubleTap: () {
-                    debugPrint("double tab saini");
+                    // debugPrint("double tab saini");
                   },
                   child: Text(
                     "Shivam Saini",
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   )),
-              Text("Human Being"),
+              AboutMe(),
+              // Text("Human Being"),
               SizedBox(
                 height: 10,
               ),
@@ -125,6 +153,32 @@ class MyAppBar extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class AboutMe extends StatefulWidget {
+  const AboutMe({super.key});
+
+  @override
+  State<AboutMe> createState() => _AboutMeState();
+}
+
+class _AboutMeState extends State<AboutMe> {
+  List x = ["human being", "exist", "saini"];
+  var y = 0;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        InkWell(
+            onTap: () {
+              setState(() {
+                y++;
+              });
+            },
+            child: Text(x[y % x.length])),
+      ],
     );
   }
 }
