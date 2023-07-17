@@ -17,12 +17,15 @@ class MyCloud extends StatefulWidget {
 }
 
 class _MyCloudState extends State<MyCloud> {
+  var mydata = "";
   cloud() async {
     var url = Uri.http('18.61.57.58', 'index.html');
     Response response = await get(url);
 
     debugPrint(response.body);
-    return response.body;
+    setState(() {
+      mydata = response.body;
+    });
   }
 
   @override
@@ -30,18 +33,42 @@ class _MyCloudState extends State<MyCloud> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Container(
-            height: 200,
-            width: 200,
-            color: Colors.cyanAccent,
-            child: Text("hello")),
+        Center(
+          child: Container(
+              height: 200,
+              width: 200,
+              color: Colors.cyanAccent,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    mydata,
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
+              )),
+        ),
         TextButton(
             onPressed: cloud,
             child: Container(
                 height: 100,
                 width: 200,
                 color: Colors.deepOrange,
-                child: Text("click me")))
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "click me",
+                      style: TextStyle(
+                        color: Colors.deepPurple,
+                        fontSize: 30,
+                      ),
+                    ),
+                  ],
+                )))
       ],
     );
   }
